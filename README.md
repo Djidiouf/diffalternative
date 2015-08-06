@@ -59,7 +59,7 @@ L’algorithme principal (la comparaison de chaînes de deux fichiers et l’aff
 Nous avions notamment 3 fichiers textes contenant des lignes similaires ou différentes selon les cas nous permettant de tester l’ensemble des situations dont nous avions besoin.
  
 
-ex.txt                  | lo.txt                  | ox.txt
+test_file1.txt          | test_file2.txt          | test_file3.txt
 ------------------------|-------------------------|--------------------
 azerty                  | qwerty                  | azerty
 123456                  | 123456                  | 123456
@@ -113,15 +113,15 @@ Elle contient évidement la fonction principale main(). Cette fonction teste tou
 Les deux fonctions permettant à l’algorithme central de fonctionner se trouvent ici. Ces deux fonctions sont :
 
  
-'''
+```
 int nombre_ligne (char* src);
-'''
+```
 Fonction qui compte le nombre de ligne d’un fichier dont le nom est envoyé en paramètre. La fonction renvoie un nombre.
 
  
-'''
+```
 char** file_to_tab(char* src, int nb);
-'''
+```
 Fonction qui transforme un fichier en tableau de chaînes de caractères, on lui indique en paramètre le nom du fichier et le nombre de ligne de ce fichier qu’il faudra avoir compté avant. La fonction renvoie un tableau de chaînes de caractères.
 
  
@@ -133,7 +133,7 @@ Les fonctions contenant les options du diff sont inscrites ici. Le détail de ch
  
 
 ### Fonctions modifiant les chaînes
-'''
+```
 char* str_to_lower (const char* chaine);
 
 char* str_onespace (const char* chaine);
@@ -143,23 +143,23 @@ char* str_onetab (const char* chaine);
 char* str_ignore_blank (char * chaine);
 
 char* str_tabtospace (const char* chaine);
-'''
+```
  
 
 ### Fonction d’affichage
-'''
+```
 void opt_help ();
-'''
+```
  
 
 ### Fonctions modifiant la sortie vers le terminal, contenant leur propre algorithme
-'''
+```
 int opt_s (char** chaine_tab1, int nb1, char** chaine_tab2, int nb2);
 
 int opt_q (char** chaine_tab1, int nb1, char** chaine_tab2, int nb2);
 
 void opt_y (char** chaine_tab1, int nb1, char** chaine_tab2, int nb2);
-'''
+```
  
 
 # Algorithmes
@@ -174,7 +174,7 @@ Enfin, une fois que le contenu de nos deux fichiers a été mis dans un tableau,
 
 Voici le contenu de deux fichiers fichier1.txt et fichier2.txt :
 
-Fichier1.txt                | Fichier2.txt
+test_file1.txt              | test_file2.txt
 ----------------------------|------------------
 azerty                      | qwerty
 123456                      | 123456
@@ -187,7 +187,7 @@ e rk lopsum inut            |
 
 Le différentiel attendu est :
 
-Fichier1.txt        | Diff  |   Fichier2.txt
+test_file1.txt      | Diff  |   test_file2.txt
 --------------------|-------|------------------------
 azerty              |   <	|   {}
                     |   >	|   qwerty
@@ -204,9 +204,9 @@ e rk lopsum inut	|   <	|   {}
 Avec :
 
 
-< : présent uniquement dans le fichier1.txt
+< : présent uniquement dans le test_file1.txt
 
-> : présent uniquement dans le fichier2.txt
+> : présent uniquement dans le test_file2.txt
 
 = : présent au même endroit dans les deux fichiers.
 
@@ -236,8 +236,8 @@ Tant qu’il reste des lignes du fichier 2 non comparées, nous les affichons.
 
  
      NB : L’algorithme est commenté en anglais dans le fichier source
-     
-'''
+
+```
 int i;
 int j = 0;
 for (i=0; i<nb1; i++)
@@ -276,7 +276,7 @@ while (j < nb2)
 printf(« > %s\n », chaine_tab2[j]);
 j++;
 }
-'''
+```
 
  
 
@@ -285,17 +285,17 @@ j++;
 Toutes les options disponibles dans ce diff en langage C se retrouvent précisées dans le help de celle-ci en faisant diff.exe –-help . Ces options peuvent bien sûr être combinées.
 
 ## –help
-'''
+```
 void opt_help ();
-'''
+```
 Affiche l’aide. La fonction ne renvoie rien.
 
 
 
 ## -b –ignore-space-change
-'''
+```
 char* str_onespace (const char* chaine);
-'''
+```
 Reçoit une chaîne et renvoie une copie de son contenu dans une autre en omettant les espaces multiples.
 
 
@@ -303,17 +303,17 @@ Reçoit une chaîne et renvoie une copie de son contenu dans une autre en ometta
  
 
 ## -i –ignore-case
-'''
+```
 char* str_to_lower (const char* chaine);
-'''
+```
 Reçoit une chaîne de caractères en paramètre, transforme toutes les lettres en minuscules et renvoie la chaîne ainsi modifiée.
 
 
 
 ## -E –ignore-tab-expansion
-'''
+```
 char* str_onetab (const char* chaine);
-'''
+```
 Reçoit une chaîne et renvoie une copie de son contenu dans une autre en omettant les tabulations multiples.
 
 
@@ -331,9 +331,9 @@ Cette option affiche simplement la version du logiciel.
 
 
 ## -w –ignore-all-space
-'''
+```
 char* str_ignore_blank (char * chaine);
-'''
+```
 Reçoit une chaîne et renvoie une copie de son contenu dans une autre en omettant tous les types d’espacement (espace et tabulation).
 
 
@@ -341,17 +341,17 @@ Reçoit une chaîne et renvoie une copie de son contenu dans une autre en ometta
  
 
 ## -t –expand-tabs
-'''
+```
 char* str_tabtospace (const char* chaine);
-'''
+```
 Reçoit une chaîne de caractère, copie son contenu dans une autre chaîne en transformant les tabulations en 4 espaces puis, renvoie cette chaîne ainsi modifiée.
 
 
 
 ## -s –report-identical-files
-'''
+```
 int opt_s (char** chaine_tab1, int nb1, char** chaine_tab2, int nb2);
-'''
+```
 La fonction reçoit les tableaux de chaînes de caractères de nos deux fichiers dont on fait le différentiel. Elle vérifie si les deux tableaux sont identiques ou non et modifie la valeur de la variable same en conséquence puis la renvoie pour traitement. Cette fonction permettra de dire si les fichiers sont identiques.
 
 
@@ -359,9 +359,9 @@ La fonction reçoit les tableaux de chaînes de caractères de nos deux fichiers
  
 
 ## -q –brief
-'''
+```
 int opt_q (char** chaine_tab1, int nb1, char** chaine_tab2, int nb2);
-'''
+```
 La fonction reçoit les tableaux de chaînes de caractères de nos deux fichiers dont on fait le différentiel. Elle vérifie si les deux tableaux sont différents ou non et modifie la valeur de la variable briefresult en conséquence puis la renvoie pour traitement dans le main(). Cette fonction permettra de dire si les fichiers sont différents.
 
 
@@ -369,9 +369,9 @@ La fonction reçoit les tableaux de chaînes de caractères de nos deux fichiers
  
 
 ## -y –side-by-side
-'''
+```
 void opt_y (char** chaine_tab1, int nb1, char** chaine_tab2, int nb2);
-'''
+```
 Produit un différentiel et l’affiche en sortie sur le terminal en 2 colonnes. La colonne de gauche contient les lignes du fichier1.txt, la colonne de droite, les lignes du fichier2.txt.
 
 Chaque ligne de chaque fichier est comparée dans son entièreté mais, ne sont affichés que les 32 premiers caractères de celle-ci. En position centrale, un caractère <, > ou = indique le résultat de la comparaison.
